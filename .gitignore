@@ -1,2 +1,5 @@
 .git/
-shared/script/commit.sh
+script/commit.sh
+workspace/*/build/*
+workspace/output/*
+*.jar
