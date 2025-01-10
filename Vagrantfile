@@ -10,6 +10,7 @@ servers = [
         :memory => 2048,
         :size => "8GB",
         :cpu => 1,
+        
         :scripts => [
           {
             :name => ".provision/setup.sh"
@@ -18,37 +19,11 @@ servers = [
             :name => ".provision/install_dependencies.sh"
           },
           {
-            :name => ".provision/configuration.sh"
+            :name => ".provision/config-master.sh"
           }
         ]
     },
 ]
-
-# VMWARE AND VIRTUALBOX Support
-# servers = [
-#     {
-#         :hostname => "mysql",
-#         :box => "bento/ubuntu-22.04",
-#         :box_version => "202401.31.0",
-#         :ip => "192.168.10.1",
-#         :memory => 2048,
-#         :size => "8GB",
-#         :cpu => 1,
-#         :scripts => [
-#         ]
-#     },
-#     {
-#         :hostname => "moodle-app",
-#         :box => "bento/ubuntu-22.04",
-#         :box_version => "202401.31.0",
-#         :ip => "192.168.10.2",
-#         :memory => 2048,
-#         :size => "8GB",
-#         :cpu => 1,
-#         :scripts => [
-#         ]
-#     }
-# ]
 
 
 Vagrant.configure(2) do |config|
@@ -58,10 +33,13 @@ Vagrant.configure(2) do |config|
       node.vm.box_version = machine[:box_version]
       node.vm.hostname = machine[:hostname]
       node.vm.network "private_network", ip: machine[:ip]
+      node.vm.synced_folder "shared/", "/home/hadoop/shared"
+      node.vm.synced_folder "shared/", "/home/vagrant/shared"
+      node.vm.synced_folder "workspace/", "/home/hadoop/workspace"
       # Corrected provider configuration
       # node.vm.provider "vmware_desktop" do |v| # if use vmware
       node.vm.provider "virtualbox" do |v|
-        v.name = "vmthp-#{machine[:hostname]}" # only in virtualbox
+        v.name = "vms-thp-#{machine[:hostname]}" # only in virtualbox
         v.memory = machine[:memory]
         v.cpus = machine[:cpu]
         # v.force_vmware_license = "workstation" # only vmware
