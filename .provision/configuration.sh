@@ -119,4 +119,4 @@ echo "Hadoop installation and configuration complete!"
 
 # Final verification of environment variables
 echo "Final environment setup:"
-sudo start-all.sh
+start-all.sh
