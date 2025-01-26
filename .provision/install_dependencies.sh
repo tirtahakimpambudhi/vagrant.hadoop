@@ -20,7 +20,7 @@ echo "DNS connectivity is OK."
 # Install required packages
 echo "Installing OpenJDK 8 and SSH"
 apt-get update
-apt-get install -y openjdk-8-jdk openssh-server openssh-client net-tools wget pdsh jq
+apt-get install -y openjdk-8-jdk openssh-server openssh-client net-tools wget pdsh jq dos2unix 
 
 # Set environment variables
 HADOOP_VERSION="3.3.6"
