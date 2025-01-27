@@ -34,6 +34,7 @@ This project automates the setup of a Hadoop environment using Vagrant. The repo
 
 4. Run the setup script to configure Hadoop:
    ```bash
+   su - hadoop # with password hadoop or can change in .provision/setup.sh
    bash shared/script/setup.sh
    ```
 
