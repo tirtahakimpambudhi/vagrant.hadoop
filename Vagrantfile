@@ -49,6 +49,10 @@ Vagrant.configure(2) do |config|
       machine[:scripts].each do |script|
            node.vm.provision "shell", :path => "#{script[:name]}"
       end
+         node.vm.provision "shell", inline: <<-SHELL
+            dos2unix /home/hadoop/shared/script/*.sh
+            dos2unix /home/hadoop/workspace/*/*.sh
+         SHELL
     end
   end
 end
